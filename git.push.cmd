@@ -1,3 +1,3 @@
 git add .
-git commit -m "FIX 增加默认阻止事件回调"
+git commit -m "MOD 优化渲染性能"
 call git push
