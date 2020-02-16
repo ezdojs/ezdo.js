@@ -1,8 +1,6 @@
 # ezdo.js
 构建用户界面的Javascript库
 
-> [您可以来这里查看更多的信息](https://ezdojs.github.io/)
-
 
 
 使用
@@ -41,17 +39,11 @@ class Ezdo extends ez.Node {
 
 
 
-快速启动项目
+更多信息
 
-```shell
-- git clone https://github/cncod/ezdo-quick
+https://ezdojs.github.io
 
-- cd ezdo-quick
 
-- npm install
-
-- npm run start
-```
 
 欢迎技术交流和反馈
 
