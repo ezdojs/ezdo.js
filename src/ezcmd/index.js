@@ -22,21 +22,54 @@ class EzCmd {
         this.shells = new Map()
     }
 
+    _ez_hasParentIsAdd(node) {
+        // 判断 shells 里有没有 parent 是添加或者删除
+        for (let shell of this.shells.values()) {
+            if(shell) {
+                if(shell.get('node')._eid === node.parent._eid) {
+                    if(shell.get('cmd') !== this.shell_mod) {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+    }
+
+    _ez_handle() {
+        let needDeleteItems = []
+        this.shells.forEach(shell => {
+            if(shell.get('cmd') === 'add') {
+                let node = shell.get('node')
+                if(this._ez_hasParentIsAdd(node)) {
+                    needDeleteItems.push(node._eid)
+                }
+            }
+        })
+        while(needDeleteItems.length) {
+            let _eid = needDeleteItems.shift()
+            this.shells.delete(_eid)
+        }
+    }
+
     push() {
         if( this.timeId !== 0) {
             return
         }
         this.timeId = setInterval(() =>{
-           render.render(this.shells)
+           this._ez_handle()
+            render.render(this.shells)
            this.shells.clear()
+           clearInterval(this.timeId)
            this.timeId = 0
         }, this.renderTime)
     }
 
     commit(shell, ctrl, node, parent) {
-        if(!render.isInit) {
+        if(!render.isInit || !node.parent) {
             return
         }
+
         let cmd = this.shells.get(node._eid)
         if(cmd) {
             if(cmd.get('cmd') === this.shell_mod) {

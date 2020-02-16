@@ -13,8 +13,8 @@ class Node extends EzObj {
         }
         this.children = []
         this._listener = {}
-        this.ezText = null
-        this._text = null
+        this.ezText = null,
+        this.parent = null
     }
     
     on(eventType, handler, caller) {
@@ -27,6 +27,7 @@ class Node extends EzObj {
     }
 
     add(node) {
+        node.parent = this
         this.children.push(node)
         shell.commit(shell.shell_add, shell.ctrl_node, node, this)
         return this
@@ -44,12 +45,19 @@ class Node extends EzObj {
             let n = this[key]
             if(n && n._ename) {
                 if(n._eid === node._eid) {
-                    delete this[key]
+                    this._ez_del_attr(key)
                     break
                 }
             }
         }
+        node.parent = null
         return this
+    }
+    removeAll() {
+        // 可优化
+        while(this.children.length) {
+            this.remove(this.children[0])
+        }
     }
     addAttr(key, value) {
         this._attr[key] = value
@@ -101,8 +109,6 @@ class Node extends EzObj {
         }
         
         this.ezText.text = value
-        // shell.commit(shell.shell_mod, shell.ctrl_text, this.ezText, null)
-        return this
     }
     get text() {
         if(this.ezText) {

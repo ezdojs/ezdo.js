@@ -1,16 +1,23 @@
-class EzText {
+import EzObj from './ezobj'
+import shell from '../ezcmd/index'
+
+class Text extends EzObj{
     constructor() {
-        this.el = new Text()
-        this._isVdom = false
+        super()
+        this._ez_data = ''
+        this._ez_create_type = 'new'
+        this.type = 'Text'
     }
+
     set text(value) {
-        if(this.el.data != value) {
-            this.el.data = value
+        if(this._ez_data !== value) {
+            this._ez_data = value
+            shell.commit(shell.shell_mod, shell.ctrl_text, this, null)
         }
     }
     get text() {
-        return this.el.data
+        return this._ez_data
     }
 }
 
-export default EzText
+export default Text

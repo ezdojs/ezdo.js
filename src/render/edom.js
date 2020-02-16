@@ -11,23 +11,10 @@ class EzDom {
             parent = this.mFragment
         }
         
-        let el = null
-        if(node._isVdom) {
-            el = document.createElement(node.type)
-            el.__ez__eid = node._eid
-            let ctor = new Connector()
-            ctor.el = el
-            ctor.vn = node
-            cm.set(node._eid, ctor)
-        }else {
-            el = node.el
-        }
-        
+        let el = this.newView(node)
         parent.appendChild(el)
-        
 
         this._updateNode(node)
-
         if(node.children && node.children.length) {
             let len = node.children.length
             for(var i = 0; i < len; i++) {
@@ -60,8 +47,7 @@ class EzDom {
     _updateNode(node) {
         let ctor = cm.get(node._eid)
         if(ctor) {
-            let el = ctor.el
-            
+           let el = ctor.el
            if(node._attr) {
                 for(var key in node._attr) {
                     let v = node._attr[key]
@@ -120,6 +106,25 @@ class EzDom {
             window.event.cancelBubble = true;
         }
     }   
+
+    newView(node) {
+        let el = null
+
+        if(node._ez_create_type === 'cd') {
+            el = document.createElement(node.type)
+        }else if(node._ez_create_type === 'new'){
+            if(node.type === 'Text') {
+                el = new Text(node._ez_data)
+            }
+        }
+        el.__ez__eid = node._eid
+        let ctor = new Connector()
+        ctor.el = el
+        ctor.vn = node
+        cm.set(node._eid, ctor)
+        
+        return el
+    }
 }
 
 export default EzDom
