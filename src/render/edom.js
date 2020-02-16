@@ -96,8 +96,8 @@ class EzDom {
         
     }
 
-    handlerProxy(evt) {
-        evt = evt || event
+    handlerProxy(e) {
+        let evt = e || event
         if(!evt) {
             console.warn('evt is undefined')
             return
@@ -112,7 +112,14 @@ class EzDom {
         if(handler) {
             handler(ctor.vn)
         }
-    }
+        if (e) {
+            e.stopPropagation();
+            e.preventDefault();
+        } else {
+            window.event.returnValue = false;
+            window.event.cancelBubble = true;
+        }
+    }   
 }
 
 export default EzDom
