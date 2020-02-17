@@ -14,7 +14,8 @@ class Node extends EzObj {
         this.children = []
         this._listener = {}
         this.ezText = null,
-        this.parent = null
+        this.parent = null,
+        this._ez_html_str = ''
     }
     
     on(eventType, handler, caller) {
@@ -115,6 +116,18 @@ class Node extends EzObj {
             return this.ezText.text
         }
         return ''
+    }
+
+    get html() {
+        return this._ez_html_str
+    }
+
+    set html(value) {
+        if(value === this._ez_html_str) {
+            return
+        }
+        this._ez_html_str = value
+        shell.commit(shell.shell_mod, shell.ctrl_text, this, null)
     }
 }
 

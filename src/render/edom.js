@@ -78,7 +78,13 @@ class EzDom {
                    }
                }
            }
+
+           if(node.html) {
+               el.innerHTML = node.html
+           }
         }
+
+
         
     }
 
