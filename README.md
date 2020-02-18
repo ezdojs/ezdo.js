@@ -50,3 +50,6 @@ https://ezdojs.github.io
 - QQ群：1050845971
 - 邮箱：cn.coder@tom.com
 
+版本更新
+
+- 2.1.1   解决 removeAll 未成功的BUG

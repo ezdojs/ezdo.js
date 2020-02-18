@@ -56,11 +56,11 @@ class EzCmd {
         if( this.timeId !== 0) {
             return
         }
-        this.timeId = setInterval(() =>{
+        this.timeId = setTimeout(() =>{
            this._ez_handle()
             render.render(this.shells)
            this.shells.clear()
-           clearInterval(this.timeId)
+           clearTimeout(this.timeId)
            this.timeId = 0
         }, this.renderTime)
     }

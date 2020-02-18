@@ -51,13 +51,12 @@ class Node extends EzObj {
                 }
             }
         }
-        node.parent = null
         return this
     }
     removeAll() {
         // 可优化
         while(this.children.length) {
-            this.remove(this.children[0])
+            this.remove(this.children[this.children.length-1])
         }
     }
     addAttr(key, value) {
