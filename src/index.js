@@ -7,8 +7,6 @@ import Input from './elements/input.js'
 
 import render from './render/index'
 
-import Router from './router/index'
-
 class Ezdo {
     constructor() {
         this.type = 'Body'
@@ -17,7 +15,6 @@ class Ezdo {
         this.Image = Image
         this.Video = Video
         this.Input = Input
-        this.Router = Router
         this.appId = 'app'
     }
     render(node) {
