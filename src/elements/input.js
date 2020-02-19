@@ -6,7 +6,16 @@ class Input extends Node {
         // if(value) {
         //     this.value = value
         // }
+        this.on('input', this.onInput)
+        this.change = null
     }
+
+    onInput() { 
+        if(this.change) {
+            this.change(this.value)
+        }
+    }
+
 }
 
 export default Input

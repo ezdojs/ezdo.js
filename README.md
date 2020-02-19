@@ -52,4 +52,4 @@ https://ezdojs.github.io
 
 版本更新
 
-- 2.1.1   解决 removeAll 未成功的BUG
+- 2.1.2   增加使用 增加默认Input.value的双向绑定

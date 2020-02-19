@@ -100,6 +100,16 @@ class EzDom {
         }
 
         let ctor = cm.get(evt.target.__ez__eid)
+        
+        if(ctor) {
+            if(ctor.vn.type === 'input') {
+                if(ctor.vn._attr._value != ctor.el.value) {
+                    ctor.vn._attr._value = ctor.el.value
+                }
+            }
+        }
+        
+        // this.el2vn(ctor)
         let handler = ctor.vn._listener[evt.type]
         if(handler) {
             handler(ctor.vn)
@@ -130,6 +140,10 @@ class EzDom {
         cm.set(node._eid, ctor)
         
         return el
+    }
+
+    el2vn(ctor) {
+        
     }
 }
 
