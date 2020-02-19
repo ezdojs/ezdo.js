@@ -28,6 +28,6 @@
     "shortid": "^2.2.15"
   },
   "files": [
-    "ez/ezdo.esm.js"
+    "ez"
   ]
 }
