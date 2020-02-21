@@ -52,4 +52,5 @@ https://ezdojs.github.io
 
 版本更新
 
-- 2.1.2   增加使用 增加默认Input.value的双向绑定
+- 2.1.3   ADD 增加use接口用来安装模块 [更多信息](https://ezdojs.github.io/api/ezdo.use.html)
+- 2.1.2   ADD 增加默认Input.value的双向绑定

@@ -24,6 +24,21 @@ class Ezdo {
         this.appId = appId
         this.render(node)
     }
+    use(module) {
+        if(!module) {
+            console.log('您将绑定一个空白对象')
+            return
+        }
+        if(!module.name) {
+           console.log('您的模块不存在name属性，将无法进行处理')
+           return
+        }
+        if(this[module.name]) {
+            console.log('已经存在同名模块，将会覆盖之前的模板')
+        }
+
+        this[module.name] = module
+    }
 }
 
 export default new Ezdo
