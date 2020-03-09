@@ -9,6 +9,7 @@ class DisplayObjectContainer extends DisplayObject {
 
   add(displayObject) {
     this.children.push(displayObject)
+    displayObject.parent = this
   }
 
   del(displayObject) {

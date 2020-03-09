@@ -1,4 +1,4 @@
-import EventBus from "../../ezdo.js/events/EventBus"
+import EventBus from "./EventBus"
 
 let _uniqueNum = 0
 let _eventBus = null
