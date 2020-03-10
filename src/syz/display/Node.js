@@ -6,7 +6,7 @@ class Node extends DisplayObject {
     this.tag = tag || 'div'
   }
 
-  set tag() {
+  set tag(tag) {
     this.displayObjectType = tag
   }
 }

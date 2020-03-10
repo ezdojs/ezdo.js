@@ -1,7 +1,23 @@
 import domevent from './../../events/domevent'
+import Static from '../../base/static'
 class Parse {
   constructor() {
-    this.binder = null
+    this.binder = Static.binder()
+  }
+
+  clearChildren() {
+    let { element } = this.binder[minObject.uniqueId]
+    if(element.children) {
+        let unis = []
+        element.children.forEach(childElement => {
+          unis.push(childElement.uniqueId)
+        })
+        element.innerHTML = ''
+        while(unis.length) {
+          let uni = unis.shift()
+          delete this.binder[uni]
+        }
+    }
   }
 
   deleteByminObject(minObject) {
@@ -27,31 +43,40 @@ class Parse {
       element,
       minObject
     }
-    updateByminObject(minObject)
+    fragment.appendChild(element)
+    this.updateByminObject(minObject)
     if(minObject.children && minObject.children.length) {
         let len = minObject.children.length
         for(var i = 0; i < len; i++) {
             this.minObjectToFragment(minObject.children[i], element)
         }
     }
-    fragment.appendChild(element)
+    
     return fragment
   }
 
   updateByminObject(minObject) {
+    
     let fragment = document.createDocumentFragment()
     let { element } = this.binder[minObject.uniqueId]
     let elementParent = element.parentNode || element.parentElement
     let nextElementSibling = element.nextElementSibling
     fragment.appendChild(element)
-    element.classList = minObject.class.classes
+    if(minObject.class.classes && minObject.class.classes.length) {
+      element.classList = minObject.class.classes 
+    }else {
+      if(element.removeAttribute) {
+        element.removeAttribute('class')
+      }
+    }
+    
     let attributes = minObject.attributes.attributes
     for(var attrName in attributes) {
       let attr = attributes[attrName]
       if(attr) {
-        element.attributes.setNamedItem(attrName, attr)
+        element.setAttribute(attrName, attr)
       }else {
-        element.attributes.removeNamedItem(attrName)
+        element.removeAttribute(attrName)
       }
     }
     //
@@ -81,8 +106,8 @@ class Parse {
         if(!evt || !evt.target.uniqueId) {
             return
         }
-
-        let {element, minObject} = this.binder[evt.target.uniqueId]
+        let binder = Static.binder()
+        let {element, minObject} = binder[evt.target.uniqueId]
         if(minObject.displayObjectType === 'input') {
             if(minObject.inputTextValue != element.value) {
                 minObject.inputTextValue = element.value

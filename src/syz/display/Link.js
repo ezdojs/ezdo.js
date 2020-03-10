@@ -10,6 +10,7 @@ class Link extends DisplayObjectContainer {
 
     set href(path) {
       this.linkPath = path
+      this.attributes.add('href', path)
     }
 
     get href() {

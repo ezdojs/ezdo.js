@@ -5,6 +5,7 @@ import Image from "./display/Image";
 import Link from "./display/Link";
 import InputText from "./display/InputText";
 import Node from "./display/Node";
+import Start from "./render/initlize"
 
 class Container extends DisplayObjectContainer { constructor() { super() } }
 
@@ -16,4 +17,5 @@ export {
   Link,
   InputText,
   Node,
+  Start
 }

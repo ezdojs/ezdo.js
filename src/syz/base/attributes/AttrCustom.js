@@ -1,6 +1,11 @@
 class AttrCustom {
-  constructor() {
+  constructor(owner) {
     this.attributes = {}
+    this.owner = owner
+  }
+
+  get(name) {
+    return this.attributes[name]
   }
 
   add(name, value) {

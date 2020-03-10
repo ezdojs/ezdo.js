@@ -1,19 +1,24 @@
 class AttrClass {
-  constructor() {
+  constructor(owner) {
     this.classes = []
+    this.owner = owner
   }
 
   add($class) {
-    if(this.classes.find(cls => cls === clss)) {
-      this.classes.add($class)
+    if(!this.classes.find(cls => cls === $class)) {
+      this.classes.push($class)
+      this.owner.commit(this.owner, 'mod')
     }
   }
 
   del($class) {
-    this.classes.splice(
-      this.classes.findIndex(cls => cls === $class),
-      1
-    )
+    let idx = this.classes.findIndex(cls => cls === $class)
+    if(idx > -1) {
+      this.classes.splice(idx, 1)
+      this.owner.commit(this.owner, 'mod')
+      
+      
+    }
   }
 }
 

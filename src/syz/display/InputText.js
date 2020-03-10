@@ -10,7 +10,13 @@ class InputText extends DisplayObject {
 
     set value(value) {
       this.inputTextValue = value
+      this.attributes.add('value', value)
     }
+
+    get value() {
+      return this.inputTextValue
+    }
+
 }
 
 export default InputText
