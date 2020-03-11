@@ -1,22 +1,29 @@
-import DisplayObjectContainer from "../base/DisplayObjectContainer";
+import Container from './../display/Container'
 
-class List extends DisplayObjectContainer{
+class List extends Container {
   constructor() {
-    super()
-
-    this.data = null
-    this.item = null
+    super('ul')
+    this.private_data = null
+    this.private_item = null
   }
 
-  render() {
-    if(this.data && this.item) {
-      let container = new DisplayObjectContainer()
-      this.data.forEach((dataItem,index) => {
-        let item = new this.item()
+  set data(data) {
+    this.private_data = data
+    this.private_render(this.private_data, this.private_item, this)
+  }
+
+  set item(item) {
+    this.private_item = item
+    this.private_render(this.private_data, this.private_item, this)
+  }
+
+  private_render($data, $item, $parent) {
+    if($data && $item) {
+      $data.forEach((dataItem, index) => {
+        let item = new $item()
         item.itemRender && item.itemRender(dataItem, index)
-        container.add(item)
+        $parent.add(new Container('li').add(item))
       })
-      this.add(container)
     }
   }
 }

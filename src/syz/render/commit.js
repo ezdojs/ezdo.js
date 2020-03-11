@@ -1,5 +1,6 @@
 
 import render from './html/'
+import Static from '../base/static'
 
 let status = {}
 const DEL = 'del'
@@ -23,7 +24,7 @@ function filter() {
   }
   while(repetitive.length) {
     let uni = repetitive.shift()
-    delete status[status]
+    delete status[uni]
   }
 }
 
@@ -41,6 +42,9 @@ function tryPush() {
 }
 
 export default function(target, ctrl) {
+  if(!Static.isInit) {
+    return
+  }
   if(ctrl === DEL || ctrl === ADD) {
     status[target.uniqueId] = { target, ctrl }
   }else {

@@ -56,7 +56,9 @@ class Parse {
   }
 
   updateByminObject(minObject) {
-    
+    if(!this.binder[minObject.uniqueId]) {
+      return
+    }
     let fragment = document.createDocumentFragment()
     let { element } = this.binder[minObject.uniqueId]
     let elementParent = element.parentNode || element.parentElement

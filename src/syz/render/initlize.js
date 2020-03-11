@@ -1,4 +1,7 @@
 import htmlRender from './html/'
+import Static from '../base/static'
 export default function(minObject, selector) {
-  return htmlRender.initView({target:minObject, ctrl: 'add'}, selector || '#app')
+  let htmldom = htmlRender.initView({target:minObject, ctrl: 'add'}, selector || '#app')
+  Static.isInit = true
+  return htmldom
 }

@@ -3,7 +3,7 @@ import DisplayObject from "../base/DisplayObject";
 class Node extends DisplayObject {
   constructor(tag) {
     super()
-    this.tag = tag || 'div'
+    this.tag = tag || 'p'
   }
 
   set tag(tag) {
